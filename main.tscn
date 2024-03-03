@@ -1,0 +1,74 @@
+[gd_scene load_steps=8 format=3 uid="uid://c5l7tyvvhyi22"]
+
+[ext_resource type="Script" path="res://play_synth.gd" id="1_bumed"]
+[ext_resource type="Script" path="res://addons/godOSC/scripts/OSCClient.gd" id="2_5mmuq"]
+[ext_resource type="Script" path="res://sclang_butt.gd" id="2_d3e4v"]
+[ext_resource type="Script" path="res://Send to sclang defined port.gd" id="3_3lepx"]
+[ext_resource type="Script" path="res://OSCClient - To sclang.gd" id="3_i5x75"]
+[ext_resource type="Script" path="res://addons/godOSC/scripts/OSCServer.gd" id="4_mc5wo"]
+[ext_resource type="Script" path="res://Create a synth by sending to sclang.gd" id="7_n6ugx"]
+
+[node name="Control" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Send to scsynth" type="Button" parent="."]
+layout_mode = 0
+offset_left = 107.0
+offset_top = 52.0
+offset_right = 346.0
+offset_bottom = 166.0
+text = "SEND TO SCSYNTH"
+script = ExtResource("1_bumed")
+
+[node name="Send to sclang" type="Button" parent="."]
+layout_mode = 0
+offset_left = 424.0
+offset_top = 55.0
+offset_right = 670.0
+offset_bottom = 159.0
+text = "SEND TO SCLANG"
+script = ExtResource("2_d3e4v")
+
+[node name="Send to sclang defined port" type="Button" parent="."]
+layout_mode = 0
+offset_left = 761.0
+offset_top = 55.0
+offset_right = 1007.0
+offset_bottom = 159.0
+text = "SEND TO SCLANG DEFINED PORT"
+script = ExtResource("3_3lepx")
+
+[node name="OSCClient - To scsynth" type="Node" parent="."]
+script = ExtResource("2_5mmuq")
+port = 57110
+
+[node name="OSCClient - To sclang" type="Node" parent="."]
+script = ExtResource("3_i5x75")
+port = 57770
+
+[node name="OSCServer" type="Node" parent="."]
+script = ExtResource("4_mc5wo")
+
+[node name="OSCClient - To sclang defined port" type="Node" parent="."]
+script = ExtResource("2_5mmuq")
+port = 4647
+
+[node name="Create a synth by sending to sclang" type="Button" parent="."]
+layout_mode = 0
+offset_left = 113.0
+offset_top = 205.0
+offset_right = 342.0
+offset_bottom = 324.0
+text = "CREATE A SYNTH BY SENDING
+OSC TO SCLANG"
+script = ExtResource("7_n6ugx")
+
+[connection signal="pressed" from="Send to scsynth" to="Send to scsynth" method="_on_pressed"]
+[connection signal="pressed" from="Send to sclang" to="Send to sclang" method="_on_pressed"]
+[connection signal="pressed" from="Send to sclang defined port" to="Send to sclang defined port" method="_on_pressed"]
+[connection signal="pressed" from="Create a synth by sending to sclang" to="Create a synth by sending to sclang" method="_on_pressed"]
